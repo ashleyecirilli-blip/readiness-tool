@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homeownership Readiness Check — Hall Financial</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:2rem 1rem;max-width:680px;margin:0 auto}
+  h1{font-size:20px;font-weight:600;margin-bottom:6px}
+  .intro{font-size:14px;color:#555;line-height:1.6;margin-bottom:1.5rem}
+  .legend{display:flex;gap:16px;margin-bottom:1rem;flex-wrap:wrap}
+  .leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666}
+  .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .categories{display:flex;flex-direction:column;gap:1rem}
+  .card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:1.25rem}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+  .card-label{font-size:15px;font-weight:600;color:#1a1a1a}
+  .card-sublabel{font-size:13px;color:#888;margin-top:2px}
+  .badge{display:inline-block;font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+  .badge-green{background:#EAF3DE;color:#27500A}
+  .badge-yellow{background:#FAEEDA;color:#633806}
+  .badge-red{background:#FCEBEB;color:#791F1F}
+  .badge-gray{background:#f5f5f5;color:#888}
+  .input-row{display:flex;align-items:center;gap:12px;margin-bottom:0.75rem}
+  .input-row label{font-size:13px;color:#666;min-width:60px}
+  .input-row input[type=range]{flex:1;accent-color:#1a1a1a}
+  .input-row .val{font-size:14px;font-weight:500;color:#1a1a1a;min-width:70px;text-align:right}
+  .track-bar{height:8px;border-radius:4px;width:100%;margin-bottom:0.75rem;background:#f0f0f0}
+  .track-fill{height:100%;border-radius:4px;transition:width 0.3s,background 0.3s}
+  .feedback{font-size:13px;color:#555;line-height:1.6;padding:10px 12px;background:#f8f8f8;border-radius:8px;margin-bottom:0.75rem}
+  .goals-section{margin-top:0.5rem}
+  .goals-label{font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px}
+  .goal-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#1a1a1a;line-height:1.5;margin-bottom:6px}
+  .goal-dot{width:6px;height:6px;border-radius:50%;margin-top:6px;flex-shrink:0}
+  .dot-green{background:#639922}.dot-yellow{background:#BA7517}.dot-red{background:#E24B4A}
+  .tooltip-wrap{position:relative;display:inline-block}
+  .tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid #ccc;font-size:11px;color:#888;cursor:help;font-style:italic;margin-left:4px;vertical-align:middle}
+  .tooltip-box{display:none;position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 6px);width:240px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:12px;color:#555;line-height:1.6;z-index:10;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+  .tooltip-wrap:hover .tooltip-box{display:block}
+  .divider{height:1px;background:#eee;margin:1.5rem 0}
+  .summary-section{background:#f8f8f8;border-radius:12px;padding:1.25rem}
+  .summary-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:10px}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1rem}
+  .sum-item{background:#fff;border-radius:8px;border:1px solid #e5e5e5;padding:10px 12px;text-align:center}
+  .sum-cat{font-size:12px;color:#888;margin-bottom:4px}
+  .sum-status{font-size:13px;font-weight:600}
+  .cta-box{background:#fff;border-radius:8px;border:1px solid #e5e5e5;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .cta-text{font-size:13px;color:#555;line-height:1.5;flex:1}
+  .cta-btn{font-size:13px;font-weight:600;padding:10px 18px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+  .cta-btn:hover{background:#333}
+  .q-block{margin-bottom:0.85rem}
+  .q-label{font-size:13px;color:#555;margin-bottom:6px;line-height:1.4}
+  .pill-group{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{font-size:12px;padding:6px 14px;border-radius:20px;border:1px solid #ddd;background:#fff;color:#1a1a1a;cursor:pointer;transition:all 0.15s}
+  .pill:hover{background:#f5f5f5}
+  .pill.active{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+  .amount-input-wrap{display:flex;align-items:center;gap:8px}
+  .amount-input-wrap span{font-size:14px;color:#888}
+  .amount-input-wrap input[type=number]{width:140px;font-size:14px;padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;color:#1a1a1a}
+  .amount-input-wrap input[type=number]:focus{outline:none;border-color:#1a1a1a}
+  .dti-result{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8f8f8;border-radius:8px;margin-bottom:0.75rem}
+  .dti-result-label{font-size:13px;color:#555}
+  .dti-result-val{font-size:18px;font-weight:600;color:#1a1a1a;margin-left:auto}
+  .debt-helper{font-size:12px;color:#666;padding:8px 12px;background:#f8f8f8;border-radius:8px;margin-bottom:0.75rem;line-height:1.6}
+  .debt-helper strong{font-weight:600;color:#1a1a1a}
+  .note-inline{font-size:12px;color:#888;font-style:italic;margin-top:6px;line-height:1.5}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{opacity:1}
+  @media(max-width:480px){.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cta-box{flex-direction:column}.cta-btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<h1>Homeownership readiness check</h1>
+<p class="intro">Enter your info below to see where you stand — and what to do next. No judgment, just a roadmap.</p>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#E24B4A"></div>Not yet</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#EF9F27"></div>Getting there</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#639922"></div>You're in range</div>
+</div>
+
+<div class="categories">
+
+  <!-- CREDIT SCORE -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="card-label">Credit score
+          <span class="tooltip-wrap">
+            <span class="tooltip-icon">i</span>
+            <span class="tooltip-box">Your credit score is a 3-digit number (300–850) that tells lenders how reliably you've repaid debt. The higher your score, the better your interest rate and loan options. Even a small score improvement can save you thousands over the life of a loan.</span>
+          </span>
+        </div>
+        <div class="card-sublabel" id="credit-sub">Move the slider to your score</div>
+      </div>
+      <span class="badge badge-gray" id="credit-badge">—</span>
+    </div>
+    <div class="input-row">
+      <label>Score</label>
+      <input type="range" min="300" max="850" value="300" step="1" id="credit-slider">
+      <span class="val" id="credit-val">300</span>
+    </div>
+    <div class="track-bar"><div class="track-fill" id="credit-fill" style="width:2%;background:#E24B4A"></div></div>
+    <div class="feedback" id="credit-feedback">Move the slider to see your status and next steps.</div>
+    <div class="goals-section" id="credit-goals"></div>
+  </div>
+
+  <!-- INCOME & DEBT -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="card-label">Income &amp; debt
+          <span class="tooltip-wrap">
+            <span class="tooltip-icon">i</span>
+            <span class="tooltip-box">We use your income and monthly debt payments to calculate your debt-to-income ratio (DTI). DTI is the percentage of your gross monthly income that goes toward debt payments. Lenders use it to measure how much of a mortgage payment you can realistically handle. Lower DTI = more buying power and better loan options. Most lenders prefer to see a DTI under 43%, with under 36% being ideal.</span>
+          </span>
+        </div>
+        <div class="card-sublabel" id="dti-sub">Answer a few quick questions</div>
+      </div>
+      <span class="badge badge-gray" id="dti-badge">—</span>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">How are you paid?</div>
+      <div class="pill-group" id="pay-type">
+        <button class="pill" data-val="hourly" onclick="setPill('pay-type',this);calcDTI()">Hourly</button>
+        <button class="pill" data-val="salary" onclick="setPill('pay-type',this);calcDTI()">Salary</button>
+        <button class="pill" data-val="self" onclick="setPill('pay-type',this);calcDTI()">Self-employed</button>
+        <button class="pill" data-val="mixed" onclick="setPill('pay-type',this);calcDTI()">Mix of both</button>
+      </div>
+    </div>
+
+    <div class="q-block" id="pay-freq-block" style="display:none">
+      <div class="q-label">How often do you get paid?</div>
+      <div class="pill-group" id="pay-freq">
+        <button class="pill" data-val="52" onclick="setPill('pay-freq',this);calcDTI()">Weekly</button>
+        <button class="pill" data-val="26" onclick="setPill('pay-freq',this);calcDTI()">Every 2 weeks</button>
+        <button class="pill" data-val="24" onclick="setPill('pay-freq',this);calcDTI()">Twice a month</button>
+        <button class="pill" data-val="12" onclick="setPill('pay-freq',this);calcDTI()">Monthly</button>
+      </div>
+    </div>
+
+    <div class="q-block" id="pay-amount-block" style="display:none">
+      <div class="q-label" id="pay-amount-label">What's your pay each period (before taxes)?</div>
+      <div class="amount-input-wrap">
+        <span>$</span>
+        <input type="number" id="pay-amount" min="0" placeholder="0" oninput="calcDTI()">
+        <span id="pay-period-hint" style="font-size:12px;color:#888"></span>
+      </div>
+    </div>
+
+    <div class="q-block" id="extra-income-block" style="display:none">
+      <div class="q-label">Do you receive overtime, bonuses, or commission regularly?</div>
+      <div class="pill-group" id="extra-income">
+        <button class="pill" data-val="yes" onclick="setPill('extra-income',this);toggleExtraAmt(true);calcDTI()">Yes</button>
+        <button class="pill" data-val="no" onclick="setPill('extra-income',this);toggleExtraAmt(false);calcDTI()">No</button>
+        <button class="pill" data-val="sometimes" onclick="setPill('extra-income',this);toggleExtraAmt(true);calcDTI()">Sometimes</button>
+      </div>
+    </div>
+
+    <div class="q-block" id="extra-amt-block" style="display:none">
+      <div class="q-label">Roughly how much extra do you earn per month (average)?</div>
+      <div class="amount-input-wrap">
+        <span>$</span>
+        <input type="number" id="extra-amt" min="0" placeholder="0" oninput="calcDTI()">
+        <span style="font-size:12px;color:#888">/month</span>
+      </div>
+      <div class="note-inline" id="extra-income-note"></div>
+    </div>
+
+    <div class="q-block" id="debt-block" style="display:none">
+      <div class="q-label">What are your total monthly debt payments?
+        <span class="tooltip-wrap">
+          <span class="tooltip-icon">i</span>
+          <span class="tooltip-box">Add up the minimum monthly payments for everything you owe: car loans, student loans, credit cards, personal loans. Don't include rent, utilities, or groceries — those don't count toward DTI.</span>
+        </span>
+      </div>
+      <div class="debt-helper"><strong>What counts:</strong> car payment, student loans, credit card minimums, personal loans, any other loan payments.<br><strong>What doesn't:</strong> rent, utilities, groceries, subscriptions.</div>
+      <div class="amount-input-wrap">
+        <span>$</span>
+        <input type="number" id="debt-amt" min="0" placeholder="0" oninput="calcDTI()">
+        <span style="font-size:12px;color:#888">/month</span>
+      </div>
+    </div>
+
+    <div id="dti-result-block" style="display:none">
+      <div class="dti-result">
+        <span class="dti-result-label">Your estimated DTI</span>
+        <span class="dti-result-val" id="dti-pct">—</span>
+      </div>
+      <div class="track-bar"><div class="track-fill" id="dti-fill" style="width:2%;background:#639922"></div></div>
+      <div class="feedback" id="dti-feedback"></div>
+      <div class="goals-section" id="dti-goals"></div>
+    </div>
+  </div>
+
+  <!-- DOWN PAYMENT -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="card-label">Down payment savings
+          <span class="tooltip-wrap">
+            <span class="tooltip-icon">i</span>
+            <span class="tooltip-box">This is the cash you've saved toward your home purchase. More saved = lower monthly payments, better loan terms, and no PMI (private mortgage insurance) required if you reach 20% of the home price. Most first-time buyers put down 3–3.5% using FHA or conventional loan programs.</span>
+          </span>
+        </div>
+        <div class="card-sublabel" id="dp-sub">Move the slider to your savings</div>
+      </div>
+      <span class="badge badge-gray" id="dp-badge">—</span>
+    </div>
+    <div class="input-row">
+      <label>Saved</label>
+      <input type="range" min="0" max="100000" value="0" step="500" id="dp-slider">
+      <span class="val" id="dp-val">$0</span>
+    </div>
+    <div class="track-bar"><div class="track-fill" id="dp-fill" style="width:2%;background:#E24B4A"></div></div>
+    <div class="feedback" id="dp-feedback">Move the slider to see your status and next steps.</div>
+    <div class="goals-section" id="dp-goals"></div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<div class="summary-section">
+  <div class="summary-title">Your snapshot</div>
+  <div class="summary-grid">
+    <div class="sum-item"><div class="sum-cat">Credit</div><div class="sum-status" id="sum-credit" style="color:#888">—</div></div>
+    <div class="sum-item"><div class="sum-cat">Income &amp; debt</div><div class="sum-status" id="sum-dti" style="color:#888">—</div></div>
+    <div class="sum-item"><div class="sum-cat">Down payment</div><div class="sum-status" id="sum-dp" style="color:#888">—</div></div>
+  </div>
+  <div class="cta-box">
+    <div class="cta-text" id="cta-text">Fill in your numbers above to get your full readiness snapshot.</div>
+    <a class="cta-btn" href="https://hallfinancial.com/contact" target="_blank">Talk to a loan officer</a>
+  </div>
+</div>
+
+<script>
+const state={payType:null,payFreq:null,monthlyIncome:0,extraIncome:null,extraAmt:0,debtAmt:0,dtiMoved:false};
+let creditMoved=false,dpMoved=false;
+
+function setPill(groupId,btn){
+  document.querySelectorAll('#'+groupId+' .pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+}
+function toggleExtraAmt(show){
+  document.getElementById('extra-amt-block').style.display=show?'block':'none';
+  if(!show){document.getElementById('extra-amt').value='';state.extraAmt=0;}
+}
+function calcDTI(){
+  const payTypeEl=document.querySelector('#pay-type .pill.active');
+  state.payType=payTypeEl?payTypeEl.dataset.val:null;
+  if(state.payType==='salary'||state.payType==='hourly'||state.payType==='mixed'){
+    document.getElementById('pay-freq-block').style.display='block';
+  } else if(state.payType==='self'){
+    document.getElementById('pay-freq-block').style.display='none';
+    document.getElementById('pay-freq').querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  }
+  if(state.payType) document.getElementById('pay-amount-block').style.display='block';
+  if(state.payType==='self'){
+    document.getElementById('pay-amount-label').textContent="What's your average monthly net income?";
+    document.getElementById('pay-period-hint').textContent='/month';
+  } else {
+    document.getElementById('pay-amount-label').textContent="What's your pay each period (before taxes)?";
+  }
+  const payFreqEl=document.querySelector('#pay-freq .pill.active');
+  const freqMult=payFreqEl?parseFloat(payFreqEl.dataset.val):null;
+  const payAmtRaw=parseFloat(document.getElementById('pay-amount').value)||0;
+  if(state.payType==='self'){
+    state.monthlyIncome=payAmtRaw;
+  } else if(freqMult){
+    state.monthlyIncome=(payAmtRaw*freqMult)/12;
+    const hints={52:'per week',26:'per 2 weeks',24:'twice/month',12:'/month'};
+    document.getElementById('pay-period-hint').textContent=hints[freqMult]||'';
+  }
+  if(payAmtRaw>0) document.getElementById('extra-income-block').style.display='block';
+  const extraEl=document.querySelector('#extra-income .pill.active');
+  state.extraIncome=extraEl?extraEl.dataset.val:null;
+  const noteEl=document.getElementById('extra-income-note');
+  if(state.extraIncome==='yes'){
+    state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;
+    noteEl.textContent='Note: Lenders typically require a 2-year history of bonus, overtime, or commission income before it can be counted. A loan officer can help you determine what qualifies.';
+  } else if(state.extraIncome==='sometimes'){
+    state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;
+    noteEl.textContent='Note: Variable income like overtime or commission usually needs a 2-year documented history to be counted by an underwriter. We\'ll use it here as an estimate, but confirm with a loan officer.';
+  } else {
+    state.extraAmt=0;noteEl.textContent='';
+  }
+  const totalIncome=state.monthlyIncome+state.extraAmt;
+  if(totalIncome>0) document.getElementById('debt-block').style.display='block';
+  const debtRaw=parseFloat(document.getElementById('debt-amt').value)||0;
+  state.debtAmt=debtRaw;
+  if(totalIncome>0&&document.getElementById('debt-amt').value!==''){
+    const dti=totalIncome>0?(debtRaw/totalIncome)*100:0;
+    document.getElementById('dti-result-block').style.display='block';
+    document.getElementById('dti-pct').textContent=dti.toFixed(1)+'%';
+    document.getElementById('dti-sub').textContent='DTI: '+dti.toFixed(1)+'%';
+    const fill=Math.min(Math.round((dti/70)*100),100);
+    document.getElementById('dti-fill').style.width=Math.max(fill,2)+'%';
+    const status=getDTIStatus(dti);
+    document.getElementById('dti-fill').style.background=getFillColor(status);
+    const badge=document.getElementById('dti-badge');
+    badge.className='badge badge-'+status;
+    badge.textContent=getDTILabel(dti);
+    document.getElementById('dti-feedback').textContent=getDTIFeedback(dti,totalIncome,debtRaw);
+    document.getElementById('dti-goals').innerHTML=renderGoals(getDTIGoals(dti),status);
+    const sum=document.getElementById('sum-dti');
+    sum.textContent=getDTILabel(dti);sum.style.color=getStatusColor(status);
+    state.dtiMoved=true;updateCTA();
+  }
+}
+function getDTIStatus(v){if(v>=44)return 'red';if(v>=36)return 'yellow';return 'green';}
+function getDTILabel(v){if(v>=44)return 'Not yet';if(v>=36)return 'Getting there';return "You're in range";}
+function getDTIFeedback(dti,income,debt){
+  const fmt=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
+  if(dti>=44)return `Your DTI is ${dti.toFixed(1)}% — that means ${fmt(debt)}/month in debt payments on ${fmt(income)}/month in income. Most lenders want to see this under 43%. The path forward is reducing monthly debt obligations, increasing income, or both.`;
+  if(dti>=36)return `You're at ${dti.toFixed(1)}% — in the window, but tighter than lenders prefer. Getting below 36% opens up better loan options and more breathing room once a mortgage payment is in the mix. You're not far.`;
+  return `${dti.toFixed(1)}% is solid. Lenders like to see under 36%, and you're there. Keep your debt load steady as you move toward your purchase.`;
+}
+function getDTIGoals(v){
+  if(v>=44)return ["Target your highest minimum payment first — eliminating one account drops your DTI immediately","Hold off on any new financing: car, furniture, credit cards — all of it adds to your ratio","Even a modest income increase can move your DTI — talk to a loan officer about what target you need"];
+  if(v>=36)return ["Pay one revolving account to zero — removes that minimum from your DTI calculation","Avoid co-signing any loans; they count toward your ratio too","Ask a loan officer what DTI target you need for the specific loan program you're eyeing"];
+  return ["Keep debt steady — don't finance any major purchases before your mortgage application","Document all income sources consistently; your loan officer can help you count more than you might expect","Get a pre-approval conversation started — you're in a good spot"];
+}
+function getCreditGoals(v){
+  if(v<580)return [{text:"Set up autopay on all accounts — missed payments are the #1 score killer"},{text:"Get your credit utilization below 30% on each card — below 10% is even better"},{text:"Check your credit report for errors at AnnualCreditReport.com (free once a year)"},{text:"A credit-builder loan can help if you have limited credit history — it's a small loan held in a savings account that you pay off over time, building a payment record without adding spendable debt. Ask your bank or credit union about options."}];
+  if(v<=620)return [{text:"Push utilization below 10% on your highest-balance card first"},{text:"Avoid opening new credit accounts right now — new inquiries and accounts can temporarily lower your score"},{text:"Check your credit report for errors at AnnualCreditReport.com — disputing inaccuracies can move your score faster than anything else"}];
+  return [{text:"Keep utilization low — under 10% is ideal"},{text:"Don't close old accounts; length of credit history helps your score"},{text:"If you're already pre-approved, avoid opening any new credit accounts — it can affect your final approval"},{text:"Monitor your score monthly so nothing surprises you at closing time"}];
+}
+function getDPGoals(v){
+  if(v===0)return [{text:"Open a dedicated savings account just for your down payment — separation is everything. A high-yield savings account (HYSA) lets your money earn interest while you save."},{text:"Research FHA loans (3.5% down) and USDA/VA programs if you qualify — the number you actually need may be smaller than you think"},{text:"Start with whatever you can automate — even small consistent deposits build the habit and the balance"}];
+  if(v<8000)return [{text:"Keep this money in a high-yield savings account (HYSA) — you'll earn interest while you save, which adds up over 12+ months"},{text:"Set a target date and work backward — how much per month do you need to reach your goal?"},{text:"Make sure you also have a separate emergency fund — your down payment savings shouldn't be your only financial cushion. Lenders want to see stability, not a zero balance the day after closing."},{text:"Avoid dipping into this fund for anything else — treat it like it's already spent"}];
+  if(v<20000)return [{text:"Keep these funds in a high-yield savings account (HYSA) so your money is working while you wait"},{text:"Make sure your emergency fund is separate from your down payment savings — you'll need both"},{text:"At 3–3.5% down, you may already be in range depending on the price of the home you're targeting — a loan officer can run the numbers with you"},{text:"Avoid dipping into this fund for anything else as you get closer to purchasing"}];
+  return [{text:"Strong position. Keep these funds in a stable, liquid account — a high-yield savings account is ideal until you're ready to move"},{text:"Make sure your emergency fund is fully separate from your down payment savings"},{text:"If you're aiming for 20% down to avoid PMI, talk to a loan officer about whether that's the right move for your situation — sometimes a lower down payment with a great rate makes more financial sense"},{text:"Get a pre-approval conversation started — at this savings level, you have real options"}];
+}
+const creditData={
+  getStatus(v){if(v<580)return 'red';if(v<=620)return 'yellow';return 'green';},
+  getFill(v){return Math.round(((v-300)/550)*100)},
+  getLabel(v){if(v<580)return 'Not yet';if(v<=620)return 'Getting there';return "You're in range";},
+  getFeedback(v){
+    if(v<580)return "A score under 580 puts most conventional loans out of reach right now — and that's okay. Scores can move faster than most people expect. The biggest movers: paying down credit card balances, keeping accounts open, and making on-time payments every single month.";
+    if(v<=620)return "You're in the game. Scores in this range can qualify for some loan programs, but you'll get better rates and more options above 620. A few months of focused effort on your utilization and payment history can move the needle more than you'd think.";
+    return "You're in qualifying territory — and the higher you push it, the better your rate. Above 740 is where the best terms live, but above 620 you have real options. Keep doing what you're doing.";
+  }
+};
+const dpData={
+  getStatus(v){if(v===0)return 'red';if(v<8000)return 'yellow';return 'green';},
+  getFill(v){if(v===0)return 2;return Math.min(Math.round((v/100000)*100),100);},
+  getLabel(v){if(v===0)return 'Not yet';if(v<8000)return 'Getting there';return "You're in range";},
+  getFeedback(v){
+    if(v===0)return "Starting at zero isn't a dead end — it's a starting line. Some loan programs require very little down (FHA is as low as 3.5%), so the number you actually need may be smaller than you think. But savings also signals financial stability to lenders. Let's get something in that account.";
+    const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
+    if(v<8000)return `You've started — and ${fmt} saved matters more than it might feel right now. Depending on the home price you're targeting, you could be closer than you think. Even 3–3.5% down on a $150K home is around $4,500–$5,250. Let's talk about your target range.`;
+    if(v<20000)return `${fmt} is real progress. You're in range for several loan programs depending on your target home price. As this number grows, your monthly payment drops and your loan options improve.`;
+    return `${fmt} is a strong foundation. You have real choices here — down payment strategy, loan types, and negotiating power. The next step is getting a pre-approval conversation going so you know exactly what you're working with.`;
+  }
+};
+function getFillColor(s){if(s==='green')return '#639922';if(s==='yellow')return '#EF9F27';return '#E24B4A';}
+function getBadgeClass(s){return 'badge badge-'+s;}
+function getStatusColor(s){if(s==='green')return '#3B6D11';if(s==='yellow')return '#854F0B';if(s==='red')return '#A32D2D';return '#888';}
+function renderGoals(goals,status){
+  const dc='dot-'+status;
+  if(Array.isArray(goals)&&typeof goals[0]==='object'){
+    return '<div class="goals-label">Recommended next steps</div>'+goals.map(g=>`<div class="goal-item"><div class="goal-dot ${dc}"></div>${g.text}</div>`).join('');
+  }
+  return '<div class="goals-label">Recommended next steps</div>'+goals.map(g=>`<div class="goal-item"><div class="goal-dot ${dc}"></div>${g}</div>`).join('');
+}
+function updateCredit(){
+  const v=parseInt(document.getElementById('credit-slider').value);
+  creditMoved=true;
+  document.getElementById('credit-val').textContent=v;
+  const status=creditData.getStatus(v);
+  document.getElementById('credit-fill').style.width=creditData.getFill(v)+'%';
+  document.getElementById('credit-fill').style.background=getFillColor(status);
+  const badge=document.getElementById('credit-badge');
+  badge.className=getBadgeClass(status);badge.textContent=creditData.getLabel(v);
+  document.getElementById('credit-sub').textContent='Score: '+v;
+  document.getElementById('credit-feedback').textContent=creditData.getFeedback(v);
+  document.getElementById('credit-goals').innerHTML=renderGoals(getCreditGoals(v),status);
+  const sum=document.getElementById('sum-credit');
+  sum.textContent=creditData.getLabel(v);sum.style.color=getStatusColor(status);
+  updateCTA();
+}
+function updateDP(){
+  const v=parseInt(document.getElementById('dp-slider').value);
+  dpMoved=true;
+  const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
+  document.getElementById('dp-val').textContent=fmt;
+  const status=dpData.getStatus(v);
+  document.getElementById('dp-fill').style.width=dpData.getFill(v)+'%';
+  document.getElementById('dp-fill').style.background=getFillColor(status);
+  const badge=document.getElementById('dp-badge');
+  badge.className=getBadgeClass(status);badge.textContent=dpData.getLabel(v);
+  document.getElementById('dp-sub').textContent='Saved: '+fmt;
+  document.getElementById('dp-feedback').textContent=dpData.getFeedback(v);
+  document.getElementById('dp-goals').innerHTML=renderGoals(getDPGoals(v),status);
+  const sum=document.getElementById('sum-dp');
+  sum.textContent=dpData.getLabel(v);sum.style.color=getStatusColor(status);
+  updateCTA();
+}
+function updateCTA(){
+  if(!creditMoved||!state.dtiMoved||!dpMoved)return;
+  const cs=creditData.getStatus(parseInt(document.getElementById('credit-slider').value));
+  const dtiVal=parseFloat(document.getElementById('dti-pct').textContent)||0;
+  const ds=getDTIStatus(dtiVal);
+  const ps=dpData.getStatus(parseInt(document.getElementById('dp-slider').value));
+  const ctaText=document.getElementById('cta-text');
+  const allGreen=cs==='green'&&ds==='green'&&ps==='green';
+  const anyRed=cs==='red'||ds==='red'||ps==='red';
+  if(allGreen)ctaText.textContent="You're checking all three boxes. Ready to take the next step? Our team has helped thousands of Michigan buyers just like you close on their dream home.";
+  else if(anyRed)ctaText.textContent="You might be further along than you think. Our loan officers have worked with buyers at every stage — sometimes a 15-minute conversation changes everything.";
+  else ctaText.textContent="You're building toward this — and you don't have to figure it out alone. A quick conversation with our team can give you a real timeline and a clear plan.";
+}
+document.getElementById('credit-slider').addEventListener('input',updateCredit);
+document.getElementById('dp-slider').addEventListener('input',updateDP);
+</script>
+</body>
+</html>
