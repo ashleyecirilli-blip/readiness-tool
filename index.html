@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homeownership Readiness Check — Hall Financial</title>
+<!-- Google Analytics — replace G-XXXXXXXXXX with your Measurement ID when confirmed -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding:2rem 1rem;max-width:680px;margin:0 auto}
@@ -39,7 +42,11 @@
   .tooltip-box{display:none;position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 6px);width:240px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:12px;color:#555;line-height:1.6;z-index:10;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
   .tooltip-wrap:hover .tooltip-box{display:block}
   .divider{height:1px;background:#eee;margin:1.5rem 0}
-  .summary-section{background:#f8f8f8;border-radius:12px;padding:1.25rem}
+  .screenshot-reminder{background:#EAF3DE;border:1px solid #C0DD97;border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:10px;margin:1rem 0}
+  .screenshot-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+  .screenshot-text{font-size:13px;color:#27500A;line-height:1.6}
+  .screenshot-text strong{font-weight:600}
+  .summary-section{background:#f8f8f8;border-radius:12px;padding:1.25rem;margin-bottom:1rem}
   .summary-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:10px}
   .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1rem}
   .sum-item{background:#fff;border-radius:8px;border:1px solid #e5e5e5;padding:10px 12px;text-align:center}
@@ -65,13 +72,33 @@
   .debt-helper{font-size:12px;color:#666;padding:8px 12px;background:#f8f8f8;border-radius:8px;margin-bottom:0.75rem;line-height:1.6}
   .debt-helper strong{font-weight:600;color:#1a1a1a}
   .note-inline{font-size:12px;color:#888;font-style:italic;margin-top:6px;line-height:1.5}
+  .contact-section{margin-top:1rem}
+  .contact-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:12px}
+  .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .contact-card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+  .contact-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #e5e5e5}
+  .contact-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-top:4px}
+  .contact-title{font-size:12px;color:#888;line-height:1.4;margin-bottom:2px}
+  .contact-nmls{font-size:11px;color:#aaa}
+  .contact-info{font-size:12px;color:#555;line-height:1.8}
+  .contact-info a{color:#555;text-decoration:none}
+  .contact-info a:hover{text-decoration:underline}
+  .contact-btn{font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;margin-top:6px;width:100%;text-decoration:none;display:inline-block}
+  .contact-btn:hover{background:#333}
   input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{opacity:1}
-  @media(max-width:480px){.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cta-box{flex-direction:column}.cta-btn{width:100%;text-align:center}}
+  @media(max-width:480px){.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cta-box{flex-direction:column}.cta-btn{width:100%;text-align:center}.contact-grid{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
+<body style="overflow:hidden;margin:0;padding:0;">
+<div style="padding:2rem 1rem;max-width:680px;margin:0 auto">
 
-<h1>Homeownership readiness check</h1>
+<h1 style="font-size:24px;font-weight:700;color:#1a1a1a;margin-bottom:12px;line-height:1.3">Are You Ready to Buy a Home?</h1>
+<div style="background:#f8f8f8;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;font-size:14px;color:#555;line-height:1.8">
+  <p style="margin-bottom:8px">Whether you're already out house hunting, or trying to decide if homeownership is right for you, you're in the right place!</p>
+  <p style="margin-bottom:8px">You're teamed up with <strong style="color:#1a1a1a">Josh Sell</strong> (mortgage loan officer) and <strong style="color:#1a1a1a">Derica Wade</strong> (associate broker, aka: realtor, but more certifications).</p>
+  <p style="margin-bottom:8px">This page will give you tangible tips based on your situation.</p>
+  <p>Then — when it's time, book time with Josh and Derica to get started on the next steps towards a pre-approval!</p>
+</div>
 <p class="intro">Enter your info below to see where you stand — and what to do next. No judgment, just a roadmap.</p>
 
 <div class="legend">
@@ -82,7 +109,6 @@
 
 <div class="categories">
 
-  <!-- CREDIT SCORE -->
   <div class="card">
     <div class="card-top">
       <div>
@@ -106,7 +132,6 @@
     <div class="goals-section" id="credit-goals"></div>
   </div>
 
-  <!-- INCOME & DEBT -->
   <div class="card">
     <div class="card-top">
       <div>
@@ -120,7 +145,6 @@
       </div>
       <span class="badge badge-gray" id="dti-badge">—</span>
     </div>
-
     <div class="q-block">
       <div class="q-label">How are you paid?</div>
       <div class="pill-group" id="pay-type">
@@ -130,7 +154,6 @@
         <button class="pill" data-val="mixed" onclick="setPill('pay-type',this);calcDTI()">Mix of both</button>
       </div>
     </div>
-
     <div class="q-block" id="pay-freq-block" style="display:none">
       <div class="q-label">How often do you get paid?</div>
       <div class="pill-group" id="pay-freq">
@@ -140,7 +163,6 @@
         <button class="pill" data-val="12" onclick="setPill('pay-freq',this);calcDTI()">Monthly</button>
       </div>
     </div>
-
     <div class="q-block" id="pay-amount-block" style="display:none">
       <div class="q-label" id="pay-amount-label">What's your pay each period (before taxes)?</div>
       <div class="amount-input-wrap">
@@ -149,7 +171,6 @@
         <span id="pay-period-hint" style="font-size:12px;color:#888"></span>
       </div>
     </div>
-
     <div class="q-block" id="extra-income-block" style="display:none">
       <div class="q-label">Do you receive overtime, bonuses, or commission regularly?</div>
       <div class="pill-group" id="extra-income">
@@ -158,7 +179,6 @@
         <button class="pill" data-val="sometimes" onclick="setPill('extra-income',this);toggleExtraAmt(true);calcDTI()">Sometimes</button>
       </div>
     </div>
-
     <div class="q-block" id="extra-amt-block" style="display:none">
       <div class="q-label">Roughly how much extra do you earn per month (average)?</div>
       <div class="amount-input-wrap">
@@ -168,7 +188,6 @@
       </div>
       <div class="note-inline" id="extra-income-note"></div>
     </div>
-
     <div class="q-block" id="debt-block" style="display:none">
       <div class="q-label">What are your total monthly debt payments?
         <span class="tooltip-wrap">
@@ -183,7 +202,6 @@
         <span style="font-size:12px;color:#888">/month</span>
       </div>
     </div>
-
     <div id="dti-result-block" style="display:none">
       <div class="dti-result">
         <span class="dti-result-label">Your estimated DTI</span>
@@ -195,7 +213,6 @@
     </div>
   </div>
 
-  <!-- DOWN PAYMENT -->
   <div class="card">
     <div class="card-top">
       <div>
@@ -221,6 +238,11 @@
 
 </div>
 
+<div class="screenshot-reminder">
+  <div class="screenshot-icon">📸</div>
+  <div class="screenshot-text"><strong>Save your progress!</strong> Screenshot this page before you leave so you can track how your numbers improve over time. Come back in 45 days and run through it again — you might be surprised how much can change.</div>
+</div>
+
 <div class="divider"></div>
 
 <div class="summary-section">
@@ -230,63 +252,65 @@
     <div class="sum-item"><div class="sum-cat">Income &amp; debt</div><div class="sum-status" id="sum-dti" style="color:#888">—</div></div>
     <div class="sum-item"><div class="sum-cat">Down payment</div><div class="sum-status" id="sum-dp" style="color:#888">—</div></div>
   </div>
-  <div class="cta-box">
+  <div style="padding:10px 14px;background:#fff;border-radius:8px;border:1px solid #e5e5e5">
     <div class="cta-text" id="cta-text">Fill in your numbers above to get your full readiness snapshot.</div>
-    <a class="cta-btn" href="https://hallfinancial.com/contact" target="_blank">Talk to a loan officer</a>
   </div>
 </div>
 
+<div class="contact-section">
+  <div class="contact-title">Your team</div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <img class="contact-photo" src="https://d9hhrg4mnvzow.cloudfront.net/callhallfirst.com/sell/336ab1ce-josh-sell-headshot-transparent_10ec0hy000000000000028.png" alt="Josh Sell">
+      <div class="contact-name">Joshua Sell</div>
+      <div class="contact-title">President's Club Home Loan Advisor</div>
+      <div class="contact-nmls">NMLS #1523964</div>
+      <div class="contact-info">
+        <a href="tel:2485900106">248.590.0106</a><br>
+        <a href="mailto:jsell@hallfg.com">jsell@hallfg.com</a>
+      </div>
+      <a class="contact-btn" href="https://callhallfirst.com/sell/" target="_blank">Book a call</a>
+    </div>
+    <div class="contact-card">
+      <img class="contact-photo" src="https://callhallfirst.com/wp-content/uploads/2026/04/DERICA-2026-240x300.jpeg" alt="Derica Wade">
+      <div class="contact-name">Derica Wade</div>
+      <div class="contact-title">Associate Broker, Real Estate One</div>
+      <div class="contact-nmls">&nbsp;</div>
+      <div class="contact-info">
+        <a href="tel:7343234486">734.323.4486</a><br>
+        <a href="mailto:h2hderica@gmail.com">h2hderica@gmail.com</a>
+      </div>
+      <a class="contact-btn" href="https://dericasellshomes.com/book" target="_blank">Book a call</a>
+    </div>
+  </div>
+</div>
+
+</div>
 <script>
 const state={payType:null,payFreq:null,monthlyIncome:0,extraIncome:null,extraAmt:0,debtAmt:0,dtiMoved:false};
 let creditMoved=false,dpMoved=false;
-
-function setPill(groupId,btn){
-  document.querySelectorAll('#'+groupId+' .pill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-}
-function toggleExtraAmt(show){
-  document.getElementById('extra-amt-block').style.display=show?'block':'none';
-  if(!show){document.getElementById('extra-amt').value='';state.extraAmt=0;}
-}
+function setPill(groupId,btn){document.querySelectorAll('#'+groupId+' .pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');}
+function toggleExtraAmt(show){document.getElementById('extra-amt-block').style.display=show?'block':'none';if(!show){document.getElementById('extra-amt').value='';state.extraAmt=0;}}
 function calcDTI(){
   const payTypeEl=document.querySelector('#pay-type .pill.active');
   state.payType=payTypeEl?payTypeEl.dataset.val:null;
-  if(state.payType==='salary'||state.payType==='hourly'||state.payType==='mixed'){
-    document.getElementById('pay-freq-block').style.display='block';
-  } else if(state.payType==='self'){
-    document.getElementById('pay-freq-block').style.display='none';
-    document.getElementById('pay-freq').querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
-  }
+  if(state.payType==='salary'||state.payType==='hourly'||state.payType==='mixed'){document.getElementById('pay-freq-block').style.display='block';}
+  else if(state.payType==='self'){document.getElementById('pay-freq-block').style.display='none';document.getElementById('pay-freq').querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));}
   if(state.payType) document.getElementById('pay-amount-block').style.display='block';
-  if(state.payType==='self'){
-    document.getElementById('pay-amount-label').textContent="What's your average monthly net income?";
-    document.getElementById('pay-period-hint').textContent='/month';
-  } else {
-    document.getElementById('pay-amount-label').textContent="What's your pay each period (before taxes)?";
-  }
+  if(state.payType==='self'){document.getElementById('pay-amount-label').textContent="What's your average monthly net income?";document.getElementById('pay-period-hint').textContent='/month';}
+  else{document.getElementById('pay-amount-label').textContent="What's your pay each period (before taxes)?";}
   const payFreqEl=document.querySelector('#pay-freq .pill.active');
   const freqMult=payFreqEl?parseFloat(payFreqEl.dataset.val):null;
   const payAmtRaw=parseFloat(document.getElementById('pay-amount').value)||0;
-  if(state.payType==='self'){
-    state.monthlyIncome=payAmtRaw;
-  } else if(freqMult){
-    state.monthlyIncome=(payAmtRaw*freqMult)/12;
-    const hints={52:'per week',26:'per 2 weeks',24:'twice/month',12:'/month'};
-    document.getElementById('pay-period-hint').textContent=hints[freqMult]||'';
-  }
+  if(state.payType==='self'){state.monthlyIncome=payAmtRaw;}
+  else if(freqMult){state.monthlyIncome=(payAmtRaw*freqMult)/12;const hints={52:'per week',26:'per 2 weeks',24:'twice/month',12:'/month'};document.getElementById('pay-period-hint').textContent=hints[freqMult]||'';}
   if(payAmtRaw>0) document.getElementById('extra-income-block').style.display='block';
   const extraEl=document.querySelector('#extra-income .pill.active');
   state.extraIncome=extraEl?extraEl.dataset.val:null;
   const noteEl=document.getElementById('extra-income-note');
-  if(state.extraIncome==='yes'){
-    state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;
-    noteEl.textContent='Note: Lenders typically require a 2-year history of bonus, overtime, or commission income before it can be counted. A loan officer can help you determine what qualifies.';
-  } else if(state.extraIncome==='sometimes'){
-    state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;
-    noteEl.textContent='Note: Variable income like overtime or commission usually needs a 2-year documented history to be counted by an underwriter. We\'ll use it here as an estimate, but confirm with a loan officer.';
-  } else {
-    state.extraAmt=0;noteEl.textContent='';
-  }
+  if(state.extraIncome==='yes'){state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;noteEl.textContent='Note: Lenders typically require a 2-year history of bonus, overtime, or commission income before it can be counted. A loan officer can help you determine what qualifies.';}
+  else if(state.extraIncome==='sometimes'){state.extraAmt=parseFloat(document.getElementById('extra-amt').value)||0;noteEl.textContent='Note: Variable income like overtime or commission usually needs a 2-year documented history to be counted by an underwriter. We\'ll use it here as an estimate, but confirm with a loan officer.';}
+  else{state.extraAmt=0;noteEl.textContent='';}
   const totalIncome=state.monthlyIncome+state.extraAmt;
   if(totalIncome>0) document.getElementById('debt-block').style.display='block';
   const debtRaw=parseFloat(document.getElementById('debt-amt').value)||0;
@@ -301,8 +325,7 @@ function calcDTI(){
     const status=getDTIStatus(dti);
     document.getElementById('dti-fill').style.background=getFillColor(status);
     const badge=document.getElementById('dti-badge');
-    badge.className='badge badge-'+status;
-    badge.textContent=getDTILabel(dti);
+    badge.className='badge badge-'+status;badge.textContent=getDTILabel(dti);
     document.getElementById('dti-feedback').textContent=getDTIFeedback(dti,totalIncome,debtRaw);
     document.getElementById('dti-goals').innerHTML=renderGoals(getDTIGoals(dti),status);
     const sum=document.getElementById('sum-dti');
@@ -357,13 +380,10 @@ const dpData={
   }
 };
 function getFillColor(s){if(s==='green')return '#639922';if(s==='yellow')return '#EF9F27';return '#E24B4A';}
-function getBadgeClass(s){return 'badge badge-'+s;}
 function getStatusColor(s){if(s==='green')return '#3B6D11';if(s==='yellow')return '#854F0B';if(s==='red')return '#A32D2D';return '#888';}
 function renderGoals(goals,status){
   const dc='dot-'+status;
-  if(Array.isArray(goals)&&typeof goals[0]==='object'){
-    return '<div class="goals-label">Recommended next steps</div>'+goals.map(g=>`<div class="goal-item"><div class="goal-dot ${dc}"></div>${g.text}</div>`).join('');
-  }
+  if(Array.isArray(goals)&&typeof goals[0]==='object'){return '<div class="goals-label">Recommended next steps</div>'+goals.map(g=>`<div class="goal-item"><div class="goal-dot ${dc}"></div>${g.text}</div>`).join('');}
   return '<div class="goals-label">Recommended next steps</div>'+goals.map(g=>`<div class="goal-item"><div class="goal-dot ${dc}"></div>${g}</div>`).join('');
 }
 function updateCredit(){
@@ -374,7 +394,7 @@ function updateCredit(){
   document.getElementById('credit-fill').style.width=creditData.getFill(v)+'%';
   document.getElementById('credit-fill').style.background=getFillColor(status);
   const badge=document.getElementById('credit-badge');
-  badge.className=getBadgeClass(status);badge.textContent=creditData.getLabel(v);
+  badge.className='badge badge-'+status;badge.textContent=creditData.getLabel(v);
   document.getElementById('credit-sub').textContent='Score: '+v;
   document.getElementById('credit-feedback').textContent=creditData.getFeedback(v);
   document.getElementById('credit-goals').innerHTML=renderGoals(getCreditGoals(v),status);
@@ -391,7 +411,7 @@ function updateDP(){
   document.getElementById('dp-fill').style.width=dpData.getFill(v)+'%';
   document.getElementById('dp-fill').style.background=getFillColor(status);
   const badge=document.getElementById('dp-badge');
-  badge.className=getBadgeClass(status);badge.textContent=dpData.getLabel(v);
+  badge.className='badge badge-'+status;badge.textContent=dpData.getLabel(v);
   document.getElementById('dp-sub').textContent='Saved: '+fmt;
   document.getElementById('dp-feedback').textContent=dpData.getFeedback(v);
   document.getElementById('dp-goals').innerHTML=renderGoals(getDPGoals(v),status);
